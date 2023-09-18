@@ -2,10 +2,10 @@ import {
   Address,
   BigInt,
 } from "@graphprotocol/graph-ts"
-  
+
 // Initialize a Token Definition with the attributes
 export class StaticTokenDefinition {
-  address : Address
+  address: Address
   symbol: string
   name: string
   decimals: BigInt
@@ -22,6 +22,26 @@ export class StaticTokenDefinition {
   static getStaticDefinitions(): Array<StaticTokenDefinition> {
     let staticDefinitions = new Array<StaticTokenDefinition>(6)
 
+
+
+    // Add CBON
+    let tokenCBON = new StaticTokenDefinition(
+      Address.fromString('0x6e64fcf15be3eb71c3d42acf44d85bb119b2d98b'),
+      'CBON',
+      'CADINU Bonus',
+      BigInt.fromI32(18)
+    )
+    staticDefinitions.push(tokenCBON)
+
+    // Add CADINU
+    let tokenCADINU = new StaticTokenDefinition(
+      Address.fromString('0x6e64fCF15Be3eB71C3d42AcF44D85bB119b2D98b'),
+      'CADINU',
+      'Canadian Inuit Dog V2',
+      BigInt.fromI32(18)
+    )
+    staticDefinitions.push(tokenCBON)
+
     // Add DGD
     let tokenDGD = new StaticTokenDefinition(
       Address.fromString('0xe0b7927c4af23765cb51314a0e0521a9645f0e2a'),
@@ -33,7 +53,7 @@ export class StaticTokenDefinition {
 
     // Add AAVE
     let tokenAAVE = new StaticTokenDefinition(
-      Address.fromString('0x7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9'),
+      Address.fromString('0x76e112203ef59d445452ef7556386dd2df3ed914'),
       'AAVE',
       'Aave Token',
       BigInt.fromI32(18)
@@ -80,14 +100,14 @@ export class StaticTokenDefinition {
   }
 
   // Helper for hardcoded tokens
-  static fromAddress(tokenAddress: Address) : StaticTokenDefinition | null {
+  static fromAddress(tokenAddress: Address): StaticTokenDefinition | null {
     let staticDefinitions = this.getStaticDefinitions()
     let tokenAddressHex = tokenAddress.toHexString()
 
     // Search the definition using the address
     for (let i = 0; i < staticDefinitions.length; i++) {
       let staticDefinition = staticDefinitions[i]
-      if(staticDefinition.address.toHexString() == tokenAddressHex) {
+      if (staticDefinition.address.toHexString() == tokenAddressHex) {
         return staticDefinition
       }
     }
